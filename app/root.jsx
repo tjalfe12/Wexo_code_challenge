@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Links,
   Meta,
@@ -5,8 +6,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import stylesheet from "~/tailwind.css?url";
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export const links = () => [{ rel: "stylesheet", href: stylesheet }];
+
+export function Layout({ children }) {
   return (
     <html lang="en">
       <head>
