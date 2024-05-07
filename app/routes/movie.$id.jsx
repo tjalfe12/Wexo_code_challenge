@@ -8,19 +8,22 @@ export let loader = async ({ params }) => {
   return data;
 };
 
-//Single_Movie_ID component to display the movie detailss
 export default function Single_Movie_ID() {
   let movie = useLoaderData();
 
-  //Function to display the movie title and description if the movie is available, else display the message "Movie not found"
   if (!movie.id) {
     return <div>Movie not found</div>;
   }
+
+  const genres = movie["plprogram$tags"]
+    .filter((tag) => tag["plprogram$scheme"] === "genre")
+    .map((tag) => tag["plprogram$title"]);
 
   return (
     <div>
       <h1>{movie.title}</h1>
       <p>{movie.description}</p>
+      <p>Genres: {genres.join(", ")}</p>
     </div>
   );
 }
