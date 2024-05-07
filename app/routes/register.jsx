@@ -1,4 +1,20 @@
 import User from "../models/User.js";
+import { redirect } from "@remix-run/node";
+import { getSession } from "../sessions.server"; // Import the getSession function
+
+export const loader = async ({ request }) => {
+  const session = await getSession(request.headers.get("Cookie"));
+  const userId = session.get("userId");
+
+  // Check if the user is logged in
+  if (userId) {
+    // User is logged in, redirect them to the root route
+    return redirect("/");
+  }
+
+  // User is not logged in, proceed with rendering the Register page
+  return null;
+};
 
 // Example route handler for user registration
 export async function action({ request }) {

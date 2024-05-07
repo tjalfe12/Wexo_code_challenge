@@ -43,6 +43,12 @@ export default function Login() {
           Login
         </button>
       </Form>
+      <p className="text-center font-light text-sm mt-8">
+        If you don't have an account yet,{" "}
+        <Link to="/register" className="underline text-rose-500">
+          sign up for free!
+        </Link>
+      </p>
     </div>
   );
 }
