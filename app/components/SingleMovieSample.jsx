@@ -24,7 +24,7 @@ export default function SingleMovieSample({ movie, wishlistButton = false }) {
             }
           />
         </Link>
-        <div>
+        <div className="flex flex-col items-center">
           <Link to={`/movie/${movie.id}`}>
             <p className="text-lg mt-4">{movie.title}</p>
           </Link>

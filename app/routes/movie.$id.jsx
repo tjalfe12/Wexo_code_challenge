@@ -30,7 +30,7 @@ export default function Single_Movie_ID() {
         <MovieImage
           movieId={movie.id}
           imageClasses={
-            "max-h-72 min-h-12 w-24 sm:w-72 object-cover rounded-md shadow-md transition-all duration-300 ease-in-out hover:shadow-lg"
+            "max-h-60 sm:max-h-72 min-h-12 w-48 sm:w-72 object-cover rounded-md shadow-md transition-all duration-300 ease-in-out hover:shadow-lg"
           }
         />
 

@@ -49,7 +49,7 @@ export default function WishlistedMovies() {
   }
 
   return (
-    <div>
+    <div className="pb-16">
       <h2 className="text-lg text-center mb-4">Wishlisted Movies</h2>
       <ul>{conditionalRender()}</ul>
     </div>
