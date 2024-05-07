@@ -8,8 +8,30 @@ export default function GenreList() {
   const [currentPage, setCurrentPage] = useState(1);
   const { genre } = useParams();
   const [searchParams] = useSearchParams();
+  const [totalCount, setTotalCount] = useState(0);
 
   const itemsPerPage = 10;
+
+  useEffect(() => {
+    const fetchTotalCount = async () => {
+      try {
+        const movie_response = await fetch(
+          `https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas?form=json&range=1-10000&byTags=genre:${genre}&byProgramType=movie&fields=title`
+        );
+        const movie_data = await movie_response.json();
+        const series_response = await fetch(
+          `https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas?form=json&range=1-10000&byTags=genre:${genre}&byProgramType=series&fields=title`
+        );
+        const series_data = await series_response.json();
+
+        setTotalCount(movie_data.entryCount + series_data.entryCount);
+      } catch (error) {
+        console.error("Error fetching total count:", error);
+      }
+    };
+
+    fetchTotalCount();
+  }, [genre]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -46,7 +68,9 @@ export default function GenreList() {
 
   return (
     <div>
-      <h2 className="text-lg text-center mb-4">{genre.toUpperCase()}</h2>
+      <h2 className="text-lg text-center mb-0">{genre.toUpperCase()}</h2>
+      <p className="text-center text-sm mb-4">{totalCount} movies found:</p>
+
       <ul>
         {currentMovies.map((movie) => (
           <li key={movie.id}>

@@ -3,8 +3,8 @@ import GenreSampler from "../components/GenreSampler";
 
 export const meta = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "FlickerHub" },
+    { name: "description", content: "Best movie hub around!" },
   ];
 };
 
