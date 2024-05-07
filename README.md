@@ -18,8 +18,11 @@ npm run dev
 
 ## Test user
 You can login with:
+```
 Username: wexo
 Password: challenge
+```
+
 
 Or feel free to create a new user.
 
