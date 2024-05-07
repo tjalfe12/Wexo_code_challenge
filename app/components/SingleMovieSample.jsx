@@ -4,7 +4,7 @@ import MovieImage from "./MovieImage";
 import WishlistButton from "./WishlistButton";
 
 //Component to display a single movie as part of a genre list
-export default function SingleMovieSample({ movie }) {
+export default function SingleMovieSample({ movie, wishlistButton = false }) {
   //If movie id is not found, display the message
   if (!movie.id) {
     return <div>Movie not found</div>;
@@ -13,10 +13,9 @@ export default function SingleMovieSample({ movie }) {
   //Extract the ID number from the URL provided ex. from http://data.entertainment.tv.theplatform.eu/entertainment/data/ProgramAvailability/41561640227
   const id = movie.id.split("/").pop();
   movie.id = id;
-
   return (
     <div>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center text-center">
         <Link to={`/movie/${movie.id}`}>
           <MovieImage
             movieId={movie.id}
@@ -29,7 +28,7 @@ export default function SingleMovieSample({ movie }) {
           <Link to={`/movie/${movie.id}`}>
             <p className="text-lg mt-4">{movie.title}</p>
           </Link>
-          <WishlistButton movie_id={movie.id} />
+          {wishlistButton ? <WishlistButton movie_id={movie.id} /> : null}
         </div>
         <hr className="w-1/2 border-1 border-primary my-2" />
       </div>

@@ -40,7 +40,7 @@ export default function WishlistedMovies() {
         <ul>
           {movies.map((movie) => (
             <li key={movie.id}>
-              <SingleMovieSample movie={movie} />
+              <SingleMovieSample movie={movie} wishlistButton={true} />
             </li>
           ))}
         </ul>
