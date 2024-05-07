@@ -16,14 +16,16 @@ export default function Navigation({ children }) {
         <li>
           <NavButton to="/genres">Genres</NavButton>
         </li>
-        <li>
-          <NavButton to="/wishlist">Wishlist</NavButton>
-        </li>
+
         {!isLoggedIn ? (
           <li>
             <NavButton to="/register">Sign up</NavButton>
           </li>
-        ) : null}
+        ) : (
+          <li>
+            <NavButton to="/wishlist">Wishlist</NavButton>
+          </li>
+        )}
       </ul>
       {children}
     </nav>

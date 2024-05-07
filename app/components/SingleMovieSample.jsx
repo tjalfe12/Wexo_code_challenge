@@ -15,7 +15,7 @@ export default function SingleMovieSample({ movie, wishlistButton = false }) {
   movie.id = id;
   return (
     <div>
-      <div className="flex flex-col items-center text-center">
+      <div className="flex flex-col items-center text-center pt-4">
         <Link to={`/movie/${movie.id}`}>
           <MovieImage
             movieId={movie.id}
@@ -30,7 +30,7 @@ export default function SingleMovieSample({ movie, wishlistButton = false }) {
           </Link>
           {wishlistButton ? <WishlistButton movie_id={movie.id} /> : null}
         </div>
-        <hr className="w-1/2 border-1 border-primary my-2" />
+        <hr className="w-2/5 border-1 border-rose-500 my-2" />
       </div>
     </div>
   );

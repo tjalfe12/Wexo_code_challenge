@@ -8,6 +8,11 @@ const MovieImage = ({ movieId, imageClasses }) => {
   useEffect(() => {
     const fetchMovieImage = async () => {
       setLoading(true); // Start loading when the fetch starts
+      //Extract the id number from the url, if it's not already in the correct format
+      if (movieId.includes("http")) {
+        movieId = movieId.split("/").pop();
+      }
+
       try {
         const response = await fetch(
           `https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas/${movieId}?form=json`

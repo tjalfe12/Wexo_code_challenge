@@ -49,8 +49,10 @@ export default function WishlistedMovies() {
   }
 
   return (
-    <div className="pb-16">
-      <h2 className="text-lg text-center mb-4">Wishlisted Movies</h2>
+    <div className="pb-16 pt-12">
+      <h2 className="text-2xl font-dosis tracking-widest uppercase text-center mb-10">
+        Your wishlist
+      </h2>
       <ul>{conditionalRender()}</ul>
     </div>
   );

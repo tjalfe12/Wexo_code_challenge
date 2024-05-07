@@ -17,7 +17,7 @@ export default function Index() {
     "text-xl sm:text-2xl md:text-3xl px-8 pb-1 w-full text-white font-dosis font-thin rounded-full bg-gradient-to-b from-rose-400 to-rose-500 shadow-md drop-shadow-md tracking-widest";
 
   return (
-    <div className="w-full lg:w-3/4 m-auto pb-20">
+    <div className="w-full lg:w-3/4 m-auto pt-12 pb-20">
       <img
         src="/FlickerHubLogo.png"
         alt="Remix Logo"

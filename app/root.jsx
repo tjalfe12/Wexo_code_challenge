@@ -24,7 +24,6 @@ export async function loader({ request }) {
 
   // Check if the user is logged in
   const isLoggedIn = !!userId;
-
   // If the user is logged in, get their wishlisted movies
   if (isLoggedIn) {
     const wishlistedMoviesData = await WishlistedMovie.find({ userId });
@@ -36,7 +35,7 @@ export async function loader({ request }) {
   //If user is logged in, return wishlist data, otherwise return only logged in status
   return isLoggedIn
     ? json({ isLoggedIn, wishlistedMovies })
-    : json({ isLoggedIn });
+    : json({ isLoggedIn, wishlistedMovies: [] });
 }
 
 export async function action({ request }) {
@@ -147,7 +146,7 @@ export function Layout({ children }) {
           <Header>
             <LoginForm isLoggedIn={data.isLoggedIn} />
           </Header>
-          <div className="pt-20 sm:pt-24 bg-rose-50 min-h-screen font-josefine">
+          <div className="pt-16 sm:pt-16 bg-rose-50 min-h-screen font-josefine">
             {children}
           </div>
           <ScrollRestoration />

@@ -5,8 +5,10 @@ export default function Genres() {
     "text-sm sm:text-md text-rose-600 border-2 border-rose-600 rounded-md px-2 pt-1 hover:bg-rose-600 hover:text-white transition-all duration-300 ease-in-out";
 
   return (
-    <div>
-      <h1 className="text-center text-2xl">GENRES</h1>
+    <div className="pt-12">
+      <h1 className="text-center font-dosis tracking-widest text-2xl">
+        GENRES
+      </h1>
       <p className="text-center text-md sm:text-lg mt-2 sm:mt-4 px-4">
         Here are some of the genres available on FlickerHub:
       </p>
