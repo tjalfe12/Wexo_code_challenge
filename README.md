@@ -1,36 +1,17 @@
-# Welcome to Remix + Vite!
+# Welcome to FlickerHub!
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/guides/vite) for details on supported features.
+📖 This is a code challenge showcasing general webdevelopment and api interaction.
 
-## Development
+## To run
 
-Run the Vite dev server:
+Please make sure you have VS Code (https://code.visualstudio.com/download) and NPM (https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed on your machine.
+
+Clone the repository and open the project in VS Code. Then open a terminal and use the following commands to run the website locally:
+
+```shellscript
+npm install
+```
 
 ```shellscript
 npm run dev
 ```
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
