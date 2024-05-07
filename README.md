@@ -1,6 +1,6 @@
 # Welcome to FlickerHub!
 
-📖 This is a code challenge showcasing general webdevelopment and api interaction.
+📖 This is a code challenge showcasing general web development and api interaction.
 
 ## To run
 
