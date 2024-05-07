@@ -1,6 +1,6 @@
 # Welcome to FlickerHub!
 
-📖 This is a code challenge showcasing general web development and api interaction.
+📖 This is a code challenge showcasing general web development and api interaction. It is created using the full-stack framework Remix.js along with TailwindCSS for styling.
 
 ## To run
 
