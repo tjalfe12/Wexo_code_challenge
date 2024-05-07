@@ -8,10 +8,11 @@ export default function GenreSampler({ genre, type }) {
   const [displayedItems, setDisplayedItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const items_per_page = 3;
-  var totalPages;
+  let totalPages;
   const buttonStyle =
     "text-rose-500 border-2 border-rose-500 text-sm sm:text-md font-dosis tracking-widest font-medium rounded-full mb-1 py-0 w-20 sm:w-24 mx-1 sm:mx-2 hover:bg-rose-500 hover:text-white hover:shadow-md transition-all duration-300 ease-in-out";
 
+  // Fetch movies or series based on genre
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -29,6 +30,7 @@ export default function GenreSampler({ genre, type }) {
     fetchItems();
   }, [genre, type]);
 
+  // Update displayed items when currentPage changes
   useEffect(() => {
     if (items) {
       const startIndex = (currentPage - 1) * items_per_page;
@@ -46,6 +48,7 @@ export default function GenreSampler({ genre, type }) {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
+  // Conditional rendering based on whether movies have been fetched yet
   function conditionalRender() {
     if (!items) {
       return <div className="text-center text-lg pt-4">Loading...</div>;
@@ -92,8 +95,9 @@ export default function GenreSampler({ genre, type }) {
       );
     }
   }
-  var hiddenIfEmpty = "";
 
+  // Hide the genre sampler if there are no movies or series in the genre
+  let hiddenIfEmpty = "";
   if (items) {
     if (items.entries.length == 0) {
       hiddenIfEmpty = "hidden";

@@ -18,6 +18,7 @@ export default function WishlistButton({ movie_id }) {
     setIsWishlisted(wishlistData.includes(movie_id));
   }, [wishlistData, movie_id]);
 
+  // Handle the form submission to add or remove the movie from the wishlist
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);

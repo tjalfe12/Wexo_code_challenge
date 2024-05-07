@@ -19,6 +19,7 @@ export default function Header({ children }) {
         </div>
         {children}
       </div>
+      {/* Mobile Navigation */}
       <div className="md:hidden flex flex-row justify-around items-center gap-10 fixed w-full p-2 font-poppins z-10 bg-gradient-to-b from-rose-400 to-rose-500 shadow-md bottom-0">
         <Navigation />
       </div>

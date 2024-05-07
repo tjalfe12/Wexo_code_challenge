@@ -5,6 +5,7 @@ const MovieImage = ({ movieId, imageClasses }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // Fetch the movie image URL based on the movie ID
   useEffect(() => {
     const fetchMovieImage = async () => {
       setLoading(true); // Start loading when the fetch starts
@@ -36,7 +37,6 @@ const MovieImage = ({ movieId, imageClasses }) => {
           setImageUrl(sortedThumbnails[0]["plprogram$url"]);
         } else {
           // Set a placeholder image if no "voduzi" thumbnails are found
-
           setImageUrl("/placeholder.jpg");
         }
       } catch (error) {

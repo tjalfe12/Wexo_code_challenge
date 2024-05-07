@@ -8,6 +8,7 @@ export default function LoginForm({ isLoggedIn }) {
   const buttonStyle =
     "text-sm font-dosis border-gray-200 border-2 rounded-full h-6 py-0 px-4 sm:px-6 bg-white drop-shadow-md shadow-inner hover:shadow-lg hover: hover:border-rose-300 hover:brightness-105 hover:bg-gradient-to-r hover:from-rose-300 hover:to-white transition-all duration-300 ease-in-out";
 
+  // Handle form submission for login by directing to root.jsx action function and then redirecting to the current page
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -21,6 +22,7 @@ export default function LoginForm({ isLoggedIn }) {
     }
   };
 
+  // If user is logged in, display a logout button
   if (isLoggedIn) {
     return (
       <Form method="post" onSubmit={handleSubmit}>
@@ -32,6 +34,7 @@ export default function LoginForm({ isLoggedIn }) {
     );
   }
 
+  // If user is not logged in, display a login form
   return (
     <>
       <Form method="post" onSubmit={handleSubmit}>

@@ -73,7 +73,7 @@ export default function Single_Movie_ID() {
       style={backgroundStyle}
       className="movie-background pt-8 pb-24 max-w-full m-auto flex flex-col items-center"
     >
-      <div className="bg-white w-4/5 sm:w-3/4 pt-6 pb-12 px-4 rounded-md shadow-md flex flex-col items-center">
+      <div className="bg-white w-4/5 sm:w-3/4 pt-6 pb-12 px-8 text-sm sm:text-md rounded-md shadow-md flex flex-col items-center">
         <p className="text-2xl font-dosis tracking-widest mb-4 uppercase">
           {movie.title} ({releaseYear})
         </p>
@@ -81,7 +81,7 @@ export default function Single_Movie_ID() {
           movieId={movie.id}
           imageClasses="max-h-60 sm:max-h-72 min-h-12 w-48 sm:w-72 object-cover rounded-md shadow-md transition-all duration-300 ease-in-out hover:shadow-lg"
         />
-        <div className="flex flex-col items-center gap-4 mt-4">
+        <div className="flex flex-col items-center gap-4 mt-8 text-left md:text-center">
           <p>{movie.description || "No description available."}</p>
           <p className="text-rose-500 text-md font-dosis tracking-wider">
             {genres.length > 0 ? genres.join(" - ") : "No genres listed."}

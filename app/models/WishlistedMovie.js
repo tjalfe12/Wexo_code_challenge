@@ -12,6 +12,7 @@ const wishlistedMovieSchema = new mongoose.Schema({
   },
 });
 
+// Create a WishlistedMovie model if it doesn't exist
 const WishlistedMovie =
   mongoose.models.WishlistedMovie ||
   mongoose.model("WishlistedMovie", wishlistedMovieSchema);
