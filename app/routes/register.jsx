@@ -1,6 +1,9 @@
 import User from "../models/User.js";
 import { redirect } from "@remix-run/node";
 import { getSession } from "../sessions.server"; // Import the getSession function
+import { useState } from "react";
+import { json } from "@remix-run/node";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 
 export const loader = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
@@ -23,6 +26,25 @@ export async function action({ request }) {
   const email = form.get("email");
   const password = form.get("password");
 
+  // Check if a user with the same username already exists
+  const existingUsername = await User.findOne({ username });
+
+  // Check if a user with the same email already exists
+  const existingEmail = await User.findOne({ email });
+
+  if (existingUsername) {
+    // Return an error response if username already exists
+    return json(
+      { error: "A user with this username already exists." },
+      { status: 400 }
+    );
+  } else if (existingEmail) {
+    // Return an error response if email already exists
+    return json(
+      { error: "A user with this email already exists." },
+      { status: 400 }
+    );
+  }
   const newUser = new User({
     username,
     email,
@@ -31,8 +53,7 @@ export async function action({ request }) {
 
   await newUser.save();
 
-  // Rest of your route handler logic
-  return new Response("User registered successfully");
+  return redirect("/login");
 }
 
 export function errorBoundary({ error }) {
@@ -44,6 +65,10 @@ export function errorBoundary({ error }) {
 }
 
 export default function Register() {
+  const [errorMessage, setErrorMessage] = useState(null);
+  const data = useActionData();
+  const errorMsg = data?.error;
+
   const inputStyle = "block text-xs w-52 py-1 px-2 border rounded-md";
   const buttonStyle =
     "text-sm font-dosis border-gray-200 border-2 rounded-full h-6 py-0 px-4 sm:px-6 bg-white drop-shadow-md shadow-inner hover:shadow-lg hover: hover:border-rose-300 hover:brightness-105 hover:bg-gradient-to-r hover:from-rose-300 hover:to-white transition-all duration-300 ease-in-out";
@@ -52,11 +77,9 @@ export default function Register() {
     <div className="flex flex-col items-center gap-8 text-center pt-12 px-2">
       <h1 className="font-dosis tracking-widest text-2xl uppercase">Sign up</h1>
       <p>Sign up for free to gain access to a personal wishlist!</p>
-      <form
-        action="/register"
-        method="post"
-        className="flex flex-col items-center gap-4"
-      >
+      {errorMsg && <p className="error text-red-500">{errorMsg}</p>}
+
+      <Form method="post" className="flex flex-col items-center gap-4">
         <label>
           Username:
           <input type="text" name="username" required className={inputStyle} />
@@ -77,7 +100,7 @@ export default function Register() {
         <button type="submit" className={buttonStyle}>
           Register
         </button>
-      </form>
+      </Form>
     </div>
   );
 }

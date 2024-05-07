@@ -12,6 +12,7 @@ export default function GenreList() {
 
   const itemsPerPage = 10;
 
+  // Fetch the total count of movies and series for the genre, retrieving only the title field to reduce the payload size
   useEffect(() => {
     const fetchTotalCount = async () => {
       try {
@@ -33,6 +34,7 @@ export default function GenreList() {
     fetchTotalCount();
   }, [genre]);
 
+  // Fetch the movies for the genre (implement support for series in the future)
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -56,12 +58,15 @@ export default function GenreList() {
     setCurrentPage(page);
   }, [searchParams]);
 
+  // Calculate the total number of pages based on the number of movies and the items per page
   const totalPages = Math.ceil(movies.length / itemsPerPage);
 
+  // Display a loading message while fetching the movies
   if (isLoading) {
     return <div className="text-center text-lg">Loading...</div>;
   }
 
+  // Calculate the start and end index for the current page
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentMovies = movies.slice(startIndex, endIndex);

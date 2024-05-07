@@ -71,9 +71,9 @@ export default function Single_Movie_ID() {
   return (
     <div
       style={backgroundStyle}
-      className="movie-background pt-8 pb-24 max-w-full m-auto flex flex-col items-center"
+      className="movie-background h-screen pt-8 pb-24 max-w-full m-auto flex flex-col items-center"
     >
-      <div className="bg-white w-4/5 sm:w-3/4 pt-6 pb-12 px-8 text-sm sm:text-md rounded-md shadow-md flex flex-col items-center">
+      <div className="bg-white w-4/5 sm:w-2/4 pt-6 pb-12 px-8 text-sm sm:text-md rounded-md shadow-md flex flex-col items-center">
         <p className="text-2xl font-dosis tracking-widest mb-4 uppercase">
           {movie.title} ({releaseYear})
         </p>

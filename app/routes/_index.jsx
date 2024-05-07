@@ -49,10 +49,10 @@ export default function Index() {
         </div>
         <p className="mb-6 text-lg text-center">
           {genre == "movie"
-            ? "Here are some of the latest movies available on FlickerHub:"
-            : "Here are some of the latest series available on FlickerHub:"}
+            ? "Here are some of the movies you can explore:"
+            : "Here are some of the series you can explore:"}
         </p>
-        <section className="w-3/4 grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 w-full">
+        <section className="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 w-full">
           <GenreSampler genre={"action"} type={genre} />
           <GenreSampler genre={"comedy"} type={genre} />
           <GenreSampler genre={"thriller"} type={genre} />
