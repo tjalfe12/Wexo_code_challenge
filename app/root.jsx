@@ -16,6 +16,7 @@ import { MovieProvider } from "./movieContext.jsx";
 import WishlistedMovie from "./models/WishlistedMovie.js";
 import { commitSession, getSession, destroySession } from "./sessions.server";
 
+// Loader function that runs on the server and is thus hidden from the user
 export async function loader({ request }) {
   const wishlistedMovies = [];
 
@@ -39,6 +40,7 @@ export async function loader({ request }) {
     : json({ isLoggedIn, wishlistedMovies: [] });
 }
 
+//Action functions are also run on the server and are called by forms making post request to the route
 export async function action({ request }) {
   const form = await request.formData();
   const actionType = form.get("action");
