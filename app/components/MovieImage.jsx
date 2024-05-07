@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 
 const MovieImage = ({ movieId, imageClasses }) => {
   const [imageUrl, setImageUrl] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovieImage = async () => {
+      setLoading(true); // Start loading when the fetch starts
       try {
         const response = await fetch(
           `https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas/${movieId}?form=json`
@@ -29,18 +31,31 @@ const MovieImage = ({ movieId, imageClasses }) => {
           setImageUrl(sortedThumbnails[0]["plprogram$url"]);
         } else {
           // Set a placeholder image if no "voduzi" thumbnails are found
+
           setImageUrl("/placeholder.jpg");
         }
       } catch (error) {
         console.error("Error fetching movie image:", error);
         setImageUrl("/placeholder.jpg");
       }
+      setLoading(false); // Stop loading when the fetch is complete or fails
     };
 
     fetchMovieImage();
   }, [movieId]);
 
-  return <img className={imageClasses} src={imageUrl} alt="Movie Thumbnail" />;
+  return loading ? (
+    <div className={imageClasses + "flex justify-center items-center"}>
+      <div
+        className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full"
+        role="status"
+      >
+        <span className="visually-hidden"></span>
+      </div>
+    </div>
+  ) : (
+    <img className={imageClasses} src={imageUrl} alt="Movie Thumbnail" />
+  );
 };
 
 export default MovieImage;
