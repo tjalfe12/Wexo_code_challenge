@@ -1,25 +1,22 @@
 import User from "../models/User.js";
 import { redirect } from "@remix-run/node";
-import { getSession } from "../sessions.server"; // Import the getSession function
+import { getSession } from "../sessions.server";
 import { useState } from "react";
 import { json } from "@remix-run/node";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import { Form, useActionData } from "@remix-run/react";
 
 export const loader = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   const userId = session.get("userId");
 
-  // Check if the user is logged in
+  // Check if the user is logged in and redirect to the root route if they are
   if (userId) {
-    // User is logged in, redirect them to the root route
     return redirect("/");
   }
-
-  // User is not logged in, proceed with rendering the Register page
+  // If the user is not logged in, proceed with rendering the Register page
   return null;
 };
 
-// Example route handler for user registration
 export async function action({ request }) {
   const form = await request.formData();
   const username = form.get("username");
@@ -45,17 +42,21 @@ export async function action({ request }) {
       { status: 400 }
     );
   }
+
+  // Create a new user with the submitted username, email, and password
   const newUser = new User({
     username,
     email,
     password,
   });
 
+  // Save the new user to the database
   await newUser.save();
 
   return redirect("/login");
 }
 
+// Error boundary component to display uncaught error messages
 export function errorBoundary({ error }) {
   return (
     <div className="flex items-center justify-center h-screen">
@@ -65,8 +66,8 @@ export function errorBoundary({ error }) {
 }
 
 export default function Register() {
-  const [errorMessage, setErrorMessage] = useState(null);
   const data = useActionData();
+  // Extract the error message from the action data
   const errorMsg = data?.error;
 
   const inputStyle = "block text-xs w-52 py-1 px-2 border rounded-md";

@@ -24,6 +24,7 @@ export async function loader({ request }) {
 
   // Check if the user is logged in
   const isLoggedIn = !!userId;
+
   // If the user is logged in, get their wishlisted movies
   if (isLoggedIn) {
     const wishlistedMoviesData = await WishlistedMovie.find({ userId });
@@ -32,7 +33,7 @@ export async function loader({ request }) {
     });
   }
 
-  //If user is logged in, return wishlist data, otherwise return only logged in status
+  //If user is logged in, return wishlist data
   return isLoggedIn
     ? json({ isLoggedIn, wishlistedMovies })
     : json({ isLoggedIn, wishlistedMovies: [] });
@@ -42,6 +43,7 @@ export async function action({ request }) {
   const form = await request.formData();
   const actionType = form.get("action");
 
+  // If the action is to add or remove a movie from the wishlist
   if (actionType === "wishlist") {
     const session = await getSession(request.headers.get("Cookie"));
 
@@ -85,6 +87,8 @@ export async function action({ request }) {
       },
     });
   }
+
+  // If the action is to log in from the header login form
   if (actionType === "login") {
     const username = form.get("username");
     const password = form.get("password");
@@ -92,6 +96,7 @@ export async function action({ request }) {
     // Find the user in the database based on the submitted username
     const user = await User.findOne({ username });
 
+    // If the user exists and the password matches, create a session
     if (user && user.password === password) {
       const session = await getSession(request.headers.get("Cookie"));
 
@@ -108,6 +113,8 @@ export async function action({ request }) {
   }
   return null;
 }
+
+// Error boundary component to display uncaught error messages
 export function ErrorBoundary({ error }) {
   return (
     <html>
@@ -115,9 +122,13 @@ export function ErrorBoundary({ error }) {
         <title>Oh no!</title>
       </head>
       <body>
-        <h1 className="text-textPrimary text-lg text-center mt-12">
+        <h1 className="text-lg text-center mt-12">
           Oops! Something went wrong.
         </h1>
+        <p className="text-center">
+          It appears you stumbled upon an error. Apologies, please try again or
+          find a different section of Flickerhub to explore!
+        </p>
       </body>
     </html>
   );

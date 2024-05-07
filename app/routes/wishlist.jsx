@@ -13,9 +13,11 @@ export async function loader({ request }) {
     throw json({ message: "User is not logged in" }, { status: 401 });
   }
 
+  // Get the wishlisted movies for the user from the database
   const wishlistedMovies = await WishlistedMovie.find({ userId });
   const movieIds = wishlistedMovies.map((movie) => movie.movieId);
 
+  // Fetch the movie data for each wishlisted movie
   movies = await Promise.all(
     movieIds.map(async (movieId) => {
       const response = await fetch(

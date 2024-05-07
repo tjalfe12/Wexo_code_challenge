@@ -11,13 +11,15 @@ async function checkImage(url) {
   }
 }
 
-export let loader = async ({ params }) => {
+export async function loader({ params }) {
+  // Fetch movie data using the movie ID from the URL
   try {
     let response = await fetch(
       `https://feed.entertainment.tv.theplatform.eu/f/jGxigC/bb-all-pas/${params.id}?form=json`
     );
     let data = await response.json();
 
+    // Extract the actors, directors, and release year from the movie data
     const actors =
       data["plprogram$credits"]
         ?.filter((credit) => credit["plprogram$creditType"] === "actor")
@@ -28,6 +30,7 @@ export let loader = async ({ params }) => {
         .map((director) => director["plprogram$personName"]) || [];
     const releaseYear = data["plprogram$year"] || "Unknown";
 
+    // Filter the thumbnails to find the best image for the background
     const thumbnails = data["plprogram$thumbnails"] || {};
     const thumbnailArray = Object.values(thumbnails).filter((thumbnail) => {
       return (
@@ -36,7 +39,8 @@ export let loader = async ({ params }) => {
       );
     });
 
-    let backgroundImage = "/placeholder-background.jpg"; // Default image
+    // Set the default background image to a placeholder
+    let backgroundImage = "/placeholder-background.jpg";
     for (const image of thumbnailArray) {
       if (await checkImage(image["plprogram$url"])) {
         backgroundImage = image["plprogram$url"];
@@ -47,14 +51,15 @@ export let loader = async ({ params }) => {
     return { movie: data, actors, directors, releaseYear, backgroundImage };
   } catch (error) {
     console.error("Error fetching movie data:", error);
-    return null; // Optional: handle errors as you see fit
+    return null;
   }
-};
+}
 
 export default function Single_Movie_ID() {
   const { movie, actors, directors, releaseYear, backgroundImage } =
     useLoaderData();
 
+  // If the movie data is not found, display an error message
   if (!movie || !movie.id) {
     return <div>Movie not found or error loading movie details.</div>;
   }
@@ -64,6 +69,8 @@ export default function Single_Movie_ID() {
     backgroundSize: "cover",
     backgroundPosition: "center",
   };
+
+  // Extract the genres from the movie data
   const genres = movie["plprogram$tags"]
     .filter((tag) => tag["plprogram$scheme"] === "genre")
     .map((tag) => tag["plprogram$title"]);
