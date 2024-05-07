@@ -3,13 +3,10 @@ import MovieImage from "../components/MovieImage";
 import WishlistButton from "../components/WishlistButton";
 
 async function checkImage(url) {
-  console.log("Checking image URL:", url);
   try {
     const response = await fetch(url, { method: "HEAD" });
-    console.log("Response:", response.ok);
     return response.ok; // Ensure the image URL is accessible
   } catch {
-    console.log("Error checking image URL");
     return false; // Return false on any error
   }
 }
@@ -71,7 +68,6 @@ export default function Single_Movie_ID() {
     .filter((tag) => tag["plprogram$scheme"] === "genre")
     .map((tag) => tag["plprogram$title"]);
 
-  console.log(movie.id);
   return (
     <div
       style={backgroundStyle}
